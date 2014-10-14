@@ -1,0 +1,36 @@
+{
+  "name": "url-shorten",
+  "version": "0.0.1",
+  "description": "A url shortener that works with S3, Redis or MongoDB",
+  "main": "shorten.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "mongodb": "~1.4.19",
+    "redis": "~0.12.1",
+    "knox": "~0.9.1"
+  },
+  "devDependencies": { "mocha": "*" },
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/like-falling-leaves/url-shorten.git"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "s3",
+    "mongodb",
+    "redis",
+    "url-shorten",
+    "urlshortener"
+  ],
+  "author": "Like Falling Leaves (http://github.com/Like-Falling-Leaves)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/like-falling-leaves/url-shorten/issues"
+  }
+}

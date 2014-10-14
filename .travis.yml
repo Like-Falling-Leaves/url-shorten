@@ -1,0 +1,10 @@
+before_script:
+  - sleep 15
+services:
+  - mongodb
+  - redis-server
+language: node_js
+
+node_js:
+  - "0.11"
+  - "0.10"
