@@ -41,7 +41,7 @@ function shortener(options) {
     return uniqueIdGenerator.getUniqueId(complete);
     function complete(err, value) {
       if (err) return done(err);
-      var prefix = config.uniqueIdPrefix || '';
+      var prefix = options.uniqueIdPrefix || '';
       if (typeof(value) == 'number') return done(null, prefix + value.toString(36));
       return done(null, prefix + value.toString());
     }
