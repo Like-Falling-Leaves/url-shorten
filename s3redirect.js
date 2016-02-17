@@ -41,11 +41,11 @@ function s3redirector(options) {
 
   function getOrSet(path, url, done) {
     // this is not perfect and has race conditions.
-    getRedirect(url, function (err, path) {
-      if (!err && path) return done(null, path);
+    getRedirect(url, function (err, existingPath) {
+      if (!err && existingPath) return done(null, existingPath.replace(/^\//, ''));
       return setRedirect(path, url, function (err) {
         if (err) return done(err);
-        setRedirect(url, path, function (err) { return done (err, path); });
+        setRedirect(url, '/' + path, function (err) { return done (err, path); });
       });
     });
   }
