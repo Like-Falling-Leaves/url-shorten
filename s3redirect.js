@@ -16,7 +16,7 @@ function s3redirector(options) {
       'x-amz-acl': 'public-read'
     };
     getClient().put(path, headers).on('response', onResponse).on('error', onError).end(data);
-    function onError(err) { console.log('s3 failed', err); return done(err); }
+    function onError(err) { return done(err); }
     function onResponse(res) {
       res.on('error', onError);
       res.resume();
@@ -32,20 +32,20 @@ function s3redirector(options) {
       res.on('error', onError);
       res.resume();
       if (res.statusCode == 200) {
-        console.log('Got response: ', res.headers);
         return done(null, res.headers['x-amz-website-redirect-location']);
       }
+
       return done('S3 responded: ' + res.statusCode);
     }
   }
 
   function getOrSet(path, url, done) {
     // this is not perfect and has race conditions.
-    getRedirect(url, function (err, path) {
-      if (!err && path) return done(null, path);
+    getRedirect(url, function (err, existingPath) {
+      if (!err && existingPath) return done(null, existingPath.replace(/^\//, ''));
       return setRedirect(path, url, function (err) {
         if (err) return done(err);
-        setRedirect(url, path, function (err) { return done (err, path); });
+        setRedirect(url, '/' + path, function (err) { return done (err, path); });
       });
     });
   }
