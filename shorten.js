@@ -30,7 +30,7 @@ function shortener(options) {
     getUniqueId(function (err, uniqueId) {
       if (err) return done(err);
       store.getOrSet(uniqueId, longUrl, finish);
-      function finish(err, path) { return done(null, options.shortUrlPrefix + uniqueId); }
+      function finish(err, path) { return done(null, options.shortUrlPrefix + path); }
     });
   }
 
